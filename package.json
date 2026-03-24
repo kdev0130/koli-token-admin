@@ -2,8 +2,11 @@
   "name": "koli-frontend",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  },
   "scripts": {
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate --schema=prisma/schema.prisma",
     "dev": "next dev -H 0.0.0.0",
     "realtime": "node scripts/realtime-server.js",
     "build": "next build",
