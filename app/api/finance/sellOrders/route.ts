@@ -24,10 +24,12 @@ export async function GET(request: NextRequest) {
 
     const orders = pending === 'true' ? await getPendingSellOrders() : await getAllSellOrders();
 
-    const serializedOrders = orders.map(o => ({
-      ...o,
-      amount: Number(o.amount)
-    }));
+    const serializedOrders = orders.map(
+      (order: { amount: bigint } & Record<string, unknown>) => ({
+        ...order,
+        amount: Number(order.amount),
+      })
+    );
 
     return NextResponse.json({ orders: serializedOrders });
   } catch (error: any) {

@@ -27,10 +27,12 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     });
 
-    const serializedTransactions = transactions.map(t => ({
-      ...t,
-      amount: Number(t.amount)
-    }));
+    const serializedTransactions = transactions.map(
+      (transaction: { amount: bigint } & Record<string, unknown>) => ({
+        ...transaction,
+        amount: Number(transaction.amount),
+      })
+    );
 
     return NextResponse.json({ transactions: serializedTransactions });
   } catch (error: any) {

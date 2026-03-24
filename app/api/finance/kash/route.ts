@@ -88,7 +88,10 @@ export async function GET(request: NextRequest) {
       createdAt: transaction.createdAt,
     }));
 
-    const totalUserBalance = users.reduce((sum: number, account) => sum + account.balance, 0);
+    const totalUserBalance = users.reduce(
+      (sum: number, account: { balance: number }) => sum + account.balance,
+      0
+    );
 
     return NextResponse.json({
       summary: {

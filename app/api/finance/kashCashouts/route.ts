@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import type { DocumentData, Query } from 'firebase-admin/firestore';
 import { firebaseAdminDb } from '@/lib/firebaseAdmin';
 import { requireFinanceUser } from '@/utils/financeGuard';
 import { approveKashCashout, rejectKashCashout } from '@/services/kashService';
@@ -13,13 +14,16 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const pendingOnly = searchParams.get('pending') === 'true';
 
-    let query = firebaseAdminDb.collection('kashCashouts');
+    let query: Query<DocumentData> = firebaseAdminDb.collection('kashCashouts');
     if (pendingOnly) {
       query = query.where('status', '==', 'PENDING');
     }
 
     const snap = await query.get();
-    const cashouts = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const cashouts = snap.docs.map((doc: { id: string; data: () => Record<string, unknown> }) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
     cashouts.sort((a: any, b: any) => {
       const aDate = new Date(a.createdAt || 0).getTime();
