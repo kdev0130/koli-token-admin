@@ -1,4 +1,4 @@
-const { existsSync } = require('fs');
+const { existsSync, readdirSync } = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
@@ -13,6 +13,17 @@ const schemaPath = candidates.find((candidate) => existsSync(candidate));
 
 if (!schemaPath) {
   console.error('Prisma schema not found. Checked:', candidates.join(', '));
+  try {
+    const cwd = process.cwd();
+    console.error('Current working directory:', cwd);
+    console.error('CWD contents:', readdirSync(cwd));
+    const prismaDir = path.join(cwd, 'prisma');
+    if (existsSync(prismaDir)) {
+      console.error('Prisma dir contents:', readdirSync(prismaDir));
+    }
+  } catch (error) {
+    console.error('Debug listing failed:', error && error.message ? error.message : String(error));
+  }
   process.exit(1);
 }
 
