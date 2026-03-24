@@ -1,11 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-import type { Prisma } from '@prisma/client';
 import { connectToDatabase, prisma } from '@/utils/db';
 import { getTreasuryBalance } from '@/services/tokenService';
 import { requireFinanceUser } from '@/utils/financeGuard';
 import { TOKEN_DECIMALS } from '@/services/kashService';
 
-type KashTransactionWithAccount = Prisma.KashTransactionGetPayload<{ include: { account: true } }>;
+type KashTransactionWithAccount = {
+  id: string;
+  kashAccountId: string;
+  account: {
+    email: string;
+    displayName: string | null;
+    walletPublicKey: string;
+  };
+  txHash: string | null;
+  reference: string | null;
+  direction: string;
+  type: string;
+  sourceApp: string | null;
+  amount: bigint | number;
+  balanceAfter: bigint | number | null;
+  status: string;
+  metadata: unknown;
+  createdAt: Date;
+};
 
 function toDisplayAmount(rawAmount: bigint | number | null | undefined) {
   if (rawAmount === null || rawAmount === undefined) return 0;
