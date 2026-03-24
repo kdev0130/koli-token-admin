@@ -30,9 +30,9 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     });
 
-    const serializedOrders = orders.map(o => ({
-      ...o,
-      amount: Number(o.amount)
+    const serializedOrders = orders.map((order: { amount: bigint } & Record<string, unknown>) => ({
+      ...order,
+      amount: Number(order.amount),
     }));
 
     return NextResponse.json({ orders: serializedOrders });
