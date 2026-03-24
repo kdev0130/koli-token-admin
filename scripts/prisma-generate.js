@@ -1,8 +1,15 @@
 const { existsSync } = require('fs');
+const path = require('path');
 const { spawnSync } = require('child_process');
 
-const candidates = ['prisma/schema.prisma', 'schema.prisma'];
-const schemaPath = candidates.find((path) => existsSync(path));
+const candidates = [];
+for (let depth = 0; depth <= 3; depth += 1) {
+  const base = path.resolve(process.cwd(), '../'.repeat(depth));
+  candidates.push(path.join(base, 'prisma', 'schema.prisma'));
+  candidates.push(path.join(base, 'schema.prisma'));
+}
+
+const schemaPath = candidates.find((candidate) => existsSync(candidate));
 
 if (!schemaPath) {
   console.error('Prisma schema not found. Checked:', candidates.join(', '));
