@@ -9,7 +9,18 @@ for (let depth = 0; depth <= 3; depth += 1) {
   candidates.push(path.join(base, 'schema.prisma'));
 }
 
-const schemaPath = candidates.find((candidate) => existsSync(candidate));
+let schemaPath = candidates.find((candidate) => existsSync(candidate));
+
+if (!schemaPath) {
+  const cwd = process.cwd();
+  const prismaDir = path.join(cwd, 'prisma');
+  if (existsSync(prismaDir)) {
+    const prismaFiles = readdirSync(prismaDir);
+    if (prismaFiles.includes('schema.prisma')) {
+      schemaPath = path.join(prismaDir, 'schema.prisma');
+    }
+  }
+}
 
 if (!schemaPath) {
   console.error('Prisma schema not found. Checked:', candidates.join(', '));
