@@ -48,7 +48,17 @@ export async function GET(request: NextRequest) {
       getTreasuryBalance(),
     ]);
 
-    const users = accounts.map((account) => ({
+    const users = accounts.map((account: {
+      id: string;
+      firebaseUid: string;
+      email: string;
+      displayName: string | null;
+      walletPublicKey: string;
+      balanceSnapshot: bigint | number;
+      status: string;
+      createdAt: Date;
+      lastLoginAt: Date | null;
+    }) => ({
       id: account.id,
       firebaseUid: account.firebaseUid,
       email: account.email,
