@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "prisma": {
-    "schema": "prisma/schema.prisma"
+    "schema": "schema.prisma"
   },
   "scripts": {
-    "postinstall": "node scripts/prisma-generate.js",
+    "postinstall": "prisma generate --schema=schema.prisma",
     "dev": "next dev -H 0.0.0.0",
     "realtime": "node scripts/realtime-server.js",
     "build": "next build",
