@@ -3,6 +3,7 @@ import { FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { Keypair } from '@solana/web3.js';
 import { firebaseAdminAuth, firebaseAdminDb } from '@/lib/firebaseAdmin';
 import { prisma } from '@/utils/db';
+import type { Prisma } from '@prisma/client';
 import { getTokenBalance, getTreasuryKeypair, transferTokensWithKeypair } from '@/services/tokenService';
 
 const ALGORITHM = 'aes-256-cbc';
@@ -330,7 +331,7 @@ export async function recordKashTransaction(params: {
   amount: bigint;
   balanceAfter?: bigint;
   status?: string;
-  metadata?: Record<string, unknown>;
+  metadata?: Prisma.InputJsonValue | null;
 }) {
   const {
     kashAccountId,
@@ -356,7 +357,7 @@ export async function recordKashTransaction(params: {
       amount,
       balanceAfter,
       status,
-      metadata,
+      metadata: metadata ?? undefined,
     },
   });
 
