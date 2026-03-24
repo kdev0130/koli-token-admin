@@ -1,4 +1,4 @@
-const { existsSync, readdirSync } = require('fs');
+const { existsSync, readdirSync, readFileSync, writeFileSync } = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
@@ -38,7 +38,16 @@ if (!schemaPath) {
   process.exit(1);
 }
 
-const result = spawnSync('npx', ['prisma', 'generate', `--schema=${schemaPath}`], {
+const cwdSchemaPath = path.join(process.cwd(), 'schema.prisma');
+try {
+  const schemaContents = readFileSync(schemaPath, 'utf8');
+  writeFileSync(cwdSchemaPath, schemaContents, 'utf8');
+} catch (error) {
+  console.error('Failed to copy Prisma schema to CWD:', error && error.message ? error.message : String(error));
+  process.exit(1);
+}
+
+const result = spawnSync('npx', ['prisma', 'generate', `--schema=${cwdSchemaPath}`], {
   stdio: 'inherit',
 });
 
