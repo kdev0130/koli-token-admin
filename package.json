@@ -1,0 +1,38 @@
+{
+  "name": "koli-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "realtime": "node scripts/realtime-server.js",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@solana/spl-token": "^0.3.11",
+    "@solana/web3.js": "^1.91.6",
+    "bcryptjs": "^2.4.3",
+    "firebase-admin": "^13.5.0",
+    "next": "14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.52",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8.4.33",
+    "prisma": "^5.22.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  }
+}

@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: var(--font-syne), sans-serif;
+  --font-body: var(--font-dm-sans), sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0d0f14;
+    color: #cbd5e1;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #131720;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a3350;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a4460;
+  }
+
+  ::selection {
+    background-color: rgba(245, 158, 11, 0.25);
+    color: #fbbf24;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-amber-500 text-slate-950 px-4 py-2 rounded-lg hover:bg-amber-400 transition-colors font-medium;
+  }
+
+  .btn-secondary {
+    @apply bg-surface-2 text-slate-200 px-4 py-2 rounded-lg border border-surface-border hover:bg-surface-3 transition-colors font-medium;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-surface-border rounded-lg bg-surface-1 text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500/60 outline-none transition-all;
+  }
+
+  .card {
+    @apply bg-surface-1 rounded-xl border border-surface-border p-6;
+  }
+
+  .table-row-hover {
+    @apply hover:bg-surface-2/60 transition-colors duration-100;
+  }
+}
