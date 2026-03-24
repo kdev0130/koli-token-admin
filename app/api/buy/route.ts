@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient, type BuyOrder } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { connectToDatabase } from '@/utils/db';
 
 const prisma = new PrismaClient();
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     });
 
-    const serializedOrders = orders.map((order: BuyOrder) => ({
+    const serializedOrders = orders.map((order: { amount: bigint } & Record<string, unknown>) => ({
       ...order,
       amount: Number(order.amount),
     }));
