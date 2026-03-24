@@ -201,7 +201,10 @@ function distributeWithdrawalAmount(
   requestedAmount: number,
   eligibleContracts: Array<{ contract: DonationContract; availableAmount: number }>
 ) {
-  const totalAvailable = eligibleContracts.reduce((sum, item) => sum + item.availableAmount, 0);
+  const totalAvailable = eligibleContracts.reduce(
+    (sum: number, item: { availableAmount: number }) => sum + item.availableAmount,
+    0
+  );
   if (requestedAmount > totalAvailable) {
     throw new Error(`Requested amount ${requestedAmount.toFixed(2)} KOLI exceeds available ${totalAvailable.toFixed(2)} KOLI`);
   }

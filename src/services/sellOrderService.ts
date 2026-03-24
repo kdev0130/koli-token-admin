@@ -41,7 +41,10 @@ export async function getSellOrdersByUser(userId: string) {
     where: { userId },
     orderBy: { createdAt: 'desc' },
   });
-  return orders.map(o => ({ ...o, amount: Number(o.amount) }));
+  return orders.map((order: { amount: bigint } & Record<string, unknown>) => ({
+    ...order,
+    amount: Number(order.amount),
+  }));
 }
 
 export async function getPendingSellOrders() {
@@ -50,7 +53,10 @@ export async function getPendingSellOrders() {
     include: { user: true },
     orderBy: { createdAt: 'asc' },
   });
-  return orders.map(o => ({ ...o, amount: Number(o.amount) }));
+  return orders.map((order: { amount: bigint } & Record<string, unknown>) => ({
+    ...order,
+    amount: Number(order.amount),
+  }));
 }
 
 export async function approveSellOrder(sellOrderId: string, approvedBy: string) {
@@ -89,5 +95,8 @@ export async function getAllSellOrders() {
     include: { user: true },
     orderBy: { createdAt: 'desc' },
   });
-  return orders.map(o => ({ ...o, amount: Number(o.amount) }));
+  return orders.map((order: { amount: bigint } & Record<string, unknown>) => ({
+    ...order,
+    amount: Number(order.amount),
+  }));
 }
