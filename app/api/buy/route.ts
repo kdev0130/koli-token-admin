@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, type BuyOrder } from '@prisma/client';
 import { connectToDatabase } from '@/utils/db';
 
 const prisma = new PrismaClient();
@@ -53,7 +53,10 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     });
 
-    const serializedOrders = orders.map(o => ({ ...o, amount: Number(o.amount) }));
+    const serializedOrders = orders.map((order: BuyOrder) => ({
+      ...order,
+      amount: Number(order.amount),
+    }));
     return NextResponse.json({ orders: serializedOrders });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
