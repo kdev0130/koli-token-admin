@@ -6,7 +6,7 @@
     "schema": "prisma/schema.prisma"
   },
   "scripts": {
-    "postinstall": "prisma generate --schema=prisma/schema.prisma",
+    "postinstall": "node scripts/prisma-generate.js",
     "dev": "next dev -H 0.0.0.0",
     "realtime": "node scripts/realtime-server.js",
     "build": "next build",
