@@ -630,7 +630,7 @@ export async function approveKashCashout(params: {
   );
 
   const createdAt = data.createdAt || new Date().toISOString();
-  const processedAt = new Date().toISOString();
+  const updatedAt = new Date().toISOString();
   await firebaseAdminDb.collection('odhexWithdrawals').doc(requestId).set(
     {
       id: requestId,
@@ -642,12 +642,12 @@ export async function approveKashCashout(params: {
       provider: String(data.channelLabel || data.channelId || 'ODHex'),
       method: String(data.channelType || 'ewallet'),
       accountDetails: String(data.accountNumber || ''),
-      status: 'completed',
+      status: 'pending',
       requestedAt: createdAt,
-      processedAt,
-      processedBy: approverId,
+      processedAt: null,
+      processedBy: null,
       transactionHash: transferResult.txHash || null,
-      updatedAt: processedAt,
+      updatedAt,
     },
     { merge: true }
   );
