@@ -620,9 +620,11 @@ export async function approveKashCashout(params: {
 
   await docRef.set(
     {
-      status: 'APPROVED',
+      status: 'MERCHANT_APPROVED',
       txHash: transferResult.txHash,
       approvedBy: approverId,
+      merchantApprovedBy: approverId,
+      merchantApprovedAt: new Date().toISOString(),
       processedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },
