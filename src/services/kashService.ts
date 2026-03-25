@@ -629,6 +629,29 @@ export async function approveKashCashout(params: {
     { merge: true }
   );
 
+  const createdAt = data.createdAt || new Date().toISOString();
+  const processedAt = new Date().toISOString();
+  await firebaseAdminDb.collection('odhexWithdrawals').doc(requestId).set(
+    {
+      id: requestId,
+      userId: firebaseUid,
+      userEmail: String(data.email || account.email || ''),
+      leaderName: data.leaderName ?? null,
+      leaderId: data.leaderId ?? null,
+      amount,
+      provider: String(data.channelLabel || data.channelId || 'ODHex'),
+      method: String(data.channelType || 'ewallet'),
+      accountDetails: String(data.accountNumber || ''),
+      status: 'completed',
+      requestedAt: createdAt,
+      processedAt,
+      processedBy: approverId,
+      transactionHash: transferResult.txHash || null,
+      updatedAt: processedAt,
+    },
+    { merge: true }
+  );
+
   return {
     txHash: transferResult.txHash,
   };
