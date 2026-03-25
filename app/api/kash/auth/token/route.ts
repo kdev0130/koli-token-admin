@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     const { code } = await request.json();
 
     if (!code || typeof code !== 'string') {
-      return NextResponse.json({ error: 'Authorization code is required' }, { status: 400 });
+      return withCors(NextResponse.json({ error: 'Authorization code is required' }, { status: 400 }));
     }
 
     const session = await createKashAuthSession(code);

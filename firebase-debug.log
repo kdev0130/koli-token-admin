@@ -1,0 +1,43 @@
+[debug] [2026-03-24T07:57:10.593Z] ----------------------------------------------------------------------
+[debug] [2026-03-24T07:57:10.609Z] Command:       /home/kdev/.nvm/versions/node/v20.20.1/bin/node /mnt/c/Users/User/AppData/Roaming/npm/node_modules/firebase-tools/lib/bin/firebase.js hosting:sites:create k-kash --project koli-2bad9
+[debug] [2026-03-24T07:57:10.609Z] CLI Version:   15.5.1
+[debug] [2026-03-24T07:57:10.609Z] Platform:      linux
+[debug] [2026-03-24T07:57:10.609Z] Node Version:  v20.20.1
+[debug] [2026-03-24T07:57:10.609Z] Time:          Tue Mar 24 2026 15:57:10 GMT+0800 (China Standard Time)
+[debug] [2026-03-24T07:57:10.609Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-24T07:57:10.836Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-24T07:57:10.837Z] > authorizing via signed-in user (kroue4444@gmail.com)
+[debug] [2026-03-24T07:57:10.837Z] [iam] checking project koli-2bad9 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-03-24T07:57:10.837Z] Checked if tokens are valid: true, expires at: 1774341930247
+[debug] [2026-03-24T07:57:10.837Z] Checked if tokens are valid: true, expires at: 1774341930247
+[debug] [2026-03-24T07:57:10.838Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions [none]
+[debug] [2026-03-24T07:57:10.838Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions  x-goog-user-project=koli-2bad9
+[debug] [2026-03-24T07:57:10.838Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-03-24T07:57:11.848Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions 200
+[debug] [2026-03-24T07:57:11.848Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-03-24T07:57:11.849Z] Checked if tokens are valid: true, expires at: 1774341930247
+[debug] [2026-03-24T07:57:11.849Z] Checked if tokens are valid: true, expires at: 1774341930247
+[debug] [2026-03-24T07:57:11.849Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9 [none]
+[debug] [2026-03-24T07:57:12.082Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9 200
+[debug] [2026-03-24T07:57:12.083Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9 {"projectNumber":"231983013520","projectId":"koli-2bad9","lifecycleState":"ACTIVE","name":"koli","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-02-02T04:53:10.257361Z"}
+[debug] [2026-03-24T07:57:12.083Z] Checked if tokens are valid: true, expires at: 1774341930247
+[debug] [2026-03-24T07:57:12.083Z] Checked if tokens are valid: true, expires at: 1774341930247
+[debug] [2026-03-24T07:57:12.083Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/231983013520/sites siteId=k-kash&validateOnly=true
+[debug] [2026-03-24T07:57:12.083Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/231983013520/sites {"appId":""}
+[debug] [2026-03-24T07:57:13.496Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/231983013520/sites 400
+[debug] [2026-03-24T07:57:13.496Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/231983013520/sites {"error":{"code":400,"message":"Invalid name: `k-kash` is reserved by another project; try something like `k-kash-5eb0e` instead","status":"FAILED_PRECONDITION"}}
+[warn] ⚠  Invalid name: `k-kash` is reserved by another project; try something like `k-kash-5eb0e` instead 
+[debug] [2026-03-24T07:57:53.353Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/mnt/c/Users/User/AppData/Roaming/npm/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:524:28)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1134:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:267:20)
+    at ReadStream.emit (node:events:536:35)
+    at emitKeys (node:internal/readline/utils:371:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+    at ReadStream.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+[error] 
+[error] Error: An unexpected error has occurred.
