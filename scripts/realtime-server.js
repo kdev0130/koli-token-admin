@@ -1,7 +1,7 @@
 const http = require("http");
 const { WebSocketServer } = require("ws");
 
-const port = Number(process.env.REALTIME_PORT || 4001);
+const port = Number(process.env.PORT || process.env.REALTIME_PORT || 4001);
 
 const server = http.createServer((req, res) => {
   if (req.method === "POST" && req.url === "/broadcast") {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
+import { RealtimeListener } from './components/RealtimeListener';
 
 const syne = Syne({
   subsets: ['latin'],
@@ -50,6 +51,7 @@ export default function RootLayout({
             },
           }}
         />
+        <RealtimeListener />
         {children}
       </body>
     </html>

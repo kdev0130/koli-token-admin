@@ -1,0 +1,40 @@
+[debug] [2026-03-26T06:29:39.876Z] ----------------------------------------------------------------------
+[debug] [2026-03-26T06:29:39.878Z] Command:       /home/kdev/.nvm/versions/node/v20.20.1/bin/node /mnt/c/Users/User/AppData/Roaming/npm/node_modules/firebase-tools/lib/bin/firebase.js deploy --only functions:token-admin
+[debug] [2026-03-26T06:29:39.878Z] CLI Version:   15.5.1
+[debug] [2026-03-26T06:29:39.878Z] Platform:      linux
+[debug] [2026-03-26T06:29:39.878Z] Node Version:  v20.20.1
+[debug] [2026-03-26T06:29:39.878Z] Time:          Thu Mar 26 2026 14:29:39 GMT+0800 (China Standard Time)
+[debug] [2026-03-26T06:29:39.878Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-26T06:30:08.900Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-26T06:30:08.901Z] > authorizing via signed-in user (kroue4444@gmail.com)
+[debug] [2026-03-26T06:30:08.901Z] [iam] checking project koli-2bad9 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-03-26T06:30:08.901Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:08.902Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:08.902Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions [none]
+[debug] [2026-03-26T06:30:08.903Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions  x-goog-user-project=koli-2bad9
+[debug] [2026-03-26T06:30:08.903Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-03-26T06:30:10.304Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions 200
+[debug] [2026-03-26T06:30:10.304Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-03-26T06:30:10.304Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:10.304Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:10.304Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/koli-2bad9/serviceAccounts/koli-2bad9@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-03-26T06:30:10.304Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/koli-2bad9/serviceAccounts/koli-2bad9@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-03-26T06:30:11.488Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/koli-2bad9/serviceAccounts/koli-2bad9@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-03-26T06:30:11.488Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/koli-2bad9/serviceAccounts/koli-2bad9@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'koli-2bad9'...
+[info] 
+[info] i  deploying functions 
+[debug] [2026-03-26T06:30:11.490Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:11.490Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:11.490Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9 [none]
+[debug] [2026-03-26T06:30:11.801Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9 200
+[debug] [2026-03-26T06:30:11.802Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/koli-2bad9 {"projectNumber":"231983013520","projectId":"koli-2bad9","lifecycleState":"ACTIVE","name":"koli","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-02-02T04:53:10.257361Z"}
+[info] i  functions: preparing codebase token-admin for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-03-26T06:30:11.803Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:11.803Z] Checked if tokens are valid: true, expires at: 1774508503782
+[debug] [2026-03-26T06:30:11.803Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/koli-2bad9/adminSdkConfig [none]

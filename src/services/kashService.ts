@@ -582,6 +582,7 @@ export async function approveKashCashout(params: {
   await firebaseAdminDb.collection('odhexWithdrawals').doc(requestId).set(
     {
       id: requestId,
+      cashoutRequestId: requestId,
       userId: firebaseUid,
       userEmail: String(data.email || account.email || ''),
       leaderName: data.leaderName ?? null,
