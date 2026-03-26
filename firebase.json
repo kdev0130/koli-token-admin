@@ -1,0 +1,9 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "token-admin",
+      "runtime": "nodejs20"
+    }
+  ]
+}

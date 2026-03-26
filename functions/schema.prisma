@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  wallet     Wallet?
+  sellOrders SellOrder[]
+  buyOrders  BuyOrder[]
+}
+
+model Wallet {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  publicKey           String   @unique
+  encryptedPrivateKey String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user               User     @relation(fields: [userId], references: [id])
+  sentTransactions   Transaction[] @relation("FromWallet")
+  receivedTransactions Transaction[] @relation("ToWallet")
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  txHash      String   @unique
+  fromWalletId String?
+  toWalletId  String?
+  fromWallet  String?
+  toWallet    String?
+  amount      BigInt
+  status      String   @default("PENDING")
+  type        String   @default("TRANSFER")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  fromWalletUser Wallet? @relation("FromWallet", fields: [fromWalletId], references: [id])
+  toWalletUser   Wallet? @relation("ToWallet", fields: [toWalletId], references: [id])
+}
+
+model SellOrder {
+  id          String   @id @default(cuid())
+  userId      String
+  amount      BigInt
+  status      String   @default("PENDING")
+  bankDetails String
+  approvedBy  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model BuyOrder {
+  id              String   @id @default(cuid())
+  userId          String
+  amount          BigInt
+  status          String   @default("PENDING")
+  paymentMethod   String
+  referenceNumber String
+  notes           String?
+  approvedBy      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User     @relation(fields: [userId], references: [id])
+}
+
+model FinanceAccount {
+  id              String   @id @default(cuid())
+  name            String
+  publicKey       String   @unique
+  totalIn         Int      @default(0)
+  totalOut        Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model KashAccount {
+  id                  String            @id @default(cuid())
+  firebaseUid         String            @unique
+  email               String            @unique
+  displayName         String?
+  walletPublicKey     String            @unique
+  encryptedPrivateKey String
+  balanceSnapshot     BigInt            @default(0)
+  status              String            @default("ACTIVE")
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  lastLoginAt         DateTime?
+
+  transactions        KashTransaction[]
+}
+
+model KashTransaction {
+  id            String      @id @default(cuid())
+  kashAccountId String
+  txHash        String?
+  reference     String?
+  direction     String
+  type          String
+  sourceApp     String?
+  amount        BigInt
+  balanceAfter  BigInt?
+  status        String      @default("COMPLETED")
+  metadata      Json?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  account       KashAccount @relation(fields: [kashAccountId], references: [id])
+
+  @@index([kashAccountId, createdAt])
+}

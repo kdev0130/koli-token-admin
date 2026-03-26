@@ -1,0 +1,28 @@
+{
+  "name": "koli-token-admin-functions",
+  "description": "Firebase Functions for koli-token-admin",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions:token-admin",
+    "logs": "firebase functions:log",
+    "postinstall": "prisma generate --schema=schema.prisma"
+  },
+  "prisma": {
+    "schema": "schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@solana/spl-token": "^0.3.11",
+    "@solana/web3.js": "^1.91.6",
+    "firebase-admin": "^13.5.0",
+    "firebase-functions": "^6.0.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  }
+}

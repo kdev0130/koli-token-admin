@@ -566,66 +566,12 @@ export async function approveKashCashout(params: {
     throw new Error('K-Kash account not found');
   }
 
-  const treasuryPublicKey = process.env.TREASURY_PUBLIC_KEY;
-  if (!treasuryPublicKey) {
-    throw new Error('Treasury wallet not configured');
-  }
-
-  const fromKeypair = getKashKeypair(account.encryptedPrivateKey);
-  const feePayer = getTreasuryKeypair();
-  if (!feePayer) {
-    throw new Error('Treasury fee payer not configured');
-  }
-
-  const rawAmount = toRawAmount(amount);
-  const rawAmountNumber = Number(rawAmount);
-  if (!Number.isSafeInteger(rawAmountNumber) || rawAmountNumber <= 0) {
-    throw new Error('Amount is invalid');
-  }
-
-  const transferResult = await transferTokensWithKeypair(
-    fromKeypair,
-    treasuryPublicKey,
-    rawAmountNumber,
-    feePayer
-  );
-
-  if (!transferResult.success) {
-    throw new Error(transferResult.error || 'Treasury transfer failed');
-  }
-
-  const { rawBalanceBigInt } = await refreshKashAccountBalance({
-    id: account.id,
-    firebaseUid: account.firebaseUid,
-    email: account.email,
-    displayName: account.displayName,
-    walletPublicKey: account.walletPublicKey,
-  });
-
-  await recordKashTransaction({
-    kashAccountId: account.id,
-    txHash: transferResult.txHash,
-    direction: 'DEBIT',
-    type: 'KASH_CASHOUT',
-    sourceApp: 'K_KASH',
-    amount: rawAmount,
-    balanceAfter: rawBalanceBigInt,
-    metadata: {
-      cashoutRequestId: requestId,
-      channelId: data.channelId,
-      channelLabel: data.channelLabel,
-      channelType: data.channelType,
-    },
-  });
-
   await docRef.set(
     {
       status: 'MERCHANT_APPROVED',
-      txHash: transferResult.txHash,
       approvedBy: approverId,
       merchantApprovedBy: approverId,
       merchantApprovedAt: new Date().toISOString(),
-      processedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },
     { merge: true }
@@ -648,15 +594,13 @@ export async function approveKashCashout(params: {
       requestedAt: createdAt,
       processedAt: null,
       processedBy: null,
-      transactionHash: transferResult.txHash || null,
+      transactionHash: null,
       updatedAt,
     },
     { merge: true }
   );
 
-  return {
-    txHash: transferResult.txHash,
-  };
+  return { ok: true };
 }
 
 export async function rejectKashCashout(params: {
